@@ -24,10 +24,15 @@ Efeitos sonoros com <audio> nativo
 🗂 Estrutura do projeto
 no-ponto/
 ├── index.html        → Tela inicial com logo e botão Play
+
 ├── jogo.html         → Tela do jogo interativo
+
 ├── style.css         → Estilos gerais das telas
+
 ├── script.js         → Script de navegação entre as telas
+
 ├── imagens/          → Contém o logo e o botão Play
+
 └── sons/             → Contém o som de clique (click.mp3)
 
 ✨ Ideias para futuras melhorias
