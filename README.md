@@ -1,25 +1,17 @@
-🟥 Ponto Vermelho
+🟥 No Ponto
 
-Um site simples e divertido onde um ponto vermelho aparece na tela — e, ao clicar nele, ele muda de posição aleatoriamente!
-Feito com HTML, CSS e JavaScript puro, tudo em um único arquivo.
+Um mini jogo simples e divertido feito com HTML, CSS e JavaScript puro.
+Clique no ponto vermelho para fazê-lo aparecer em lugares aleatórios da tela — com direito a um efeito sonoro a cada clique!
 
-🚀 Como usar
+🚀 Como jogar
 
-Clone o repositório:
+Abra o arquivo index.html no navegador (ou use o Live Server no VS Code).
 
-git clone https://github.com/seu-usuario/ponto-vermelho.git
+Na tela inicial, clique no botão Play.
 
+O jogo começa! Clique no ponto vermelho o mais rápido que puder 🔴
 
-Acesse a pasta do projeto:
-
-cd ponto-vermelho
-
-
-Abra o arquivo index.html no seu navegador.
-
-Dica: se estiver usando VS Code, você pode clicar com o botão direito no arquivo e escolher “Open with Live Server” para visualizar facilmente.
-
-🧠 Tecnologias usadas
+🧠 Tecnologias utilizadas
 
 HTML5
 
@@ -27,24 +19,28 @@ CSS3
 
 JavaScript (ES6)
 
-✨ Ideias para melhorias
+Efeitos sonoros com <audio> nativo
 
-Adicionar um contador de cliques
+🗂 Estrutura do projeto
+no-ponto/
+├── index.html        → Tela inicial com logo e botão Play
+├── jogo.html         → Tela do jogo interativo
+├── style.css         → Estilos gerais das telas
+├── script.js         → Script de navegação entre as telas
+├── imagens/          → Contém o logo e o botão Play
+└── sons/             → Contém o som de clique (click.mp3)
 
-Cronômetro ou placar de pontuação
+✨ Ideias para futuras melhorias
 
-Efeitos sonoros ou visuais
+🧮 Adicionar contador de cliques (pontuação)
 
-Dificuldades diferentes (ponto menor, movimento mais rápido)
+⏱️ Adicionar cronômetro ou tempo-limite
 
-📷 Exemplo
-<img width="958" height="413" alt="image" src="https://github.com/user-attachments/assets/1d407538-649e-42ef-9e6e-d7f72f6f50d6" />
+📸 Exemplo
 
-<img width="959" height="412" alt="image" src="https://github.com/user-attachments/assets/60af4b3e-4460-4ccb-9064-a902a070d5bc" />
-
-<img width="959" height="415" alt="image" src="https://github.com/user-attachments/assets/2ef367a1-8456-4610-b45e-9d5fe1d8dcab" />
+(adicione aqui uma captura de tela da tela inicial e do jogo)
 
 📄 Licença
 
 Este projeto é livre para estudo e uso pessoal.
-Sinta-se à vontade para modificar, melhorar e compartilhar! 🚀
+Sinta-se à vontade para modificar e compartilhar! 🚀
