@@ -3,44 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ponto Vermelho</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        background-color: white;
-        overflow: hidden;
-        position: relative;
-      }
-
-      #dot {
-        width: 40px;
-        height: 40px;
-        background-color: red;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
-        transition: top 0.2s, left 0.2s;
-      }
-    </style>
+    <title>No Ponto - Início</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div id="dot"></div>
+  <body class="intro">
+    <div class="container">
+      <img src="imagens/logo.png" alt="No Ponto" class="logo" />
+      <img
+        src="imagens/play.png"
+        alt="Botão Play"
+        class="play-btn"
+        id="playButton"
+      />
+    </div>
 
-    <script>
-      const dot = document.getElementById("dot");
-      dot.addEventListener("click", () => {
-        const maxX = window.innerWidth - dot.offsetWidth;
-        const maxY = window.innerHeight - dot.offsetHeight;
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
-        dot.style.left = `${randomX}px`;
-        dot.style.top = `${randomY}px`;
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

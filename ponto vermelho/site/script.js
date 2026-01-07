@@ -1,12 +1,8 @@
-const dot = document.getElementById("dot");
+// Lida com o botão Play na tela inicial
+const playButton = document.getElementById("playButton");
 
-dot.addEventListener("click", () => {
-    const maxX = window.innerWidth - dot.offsetWidth;
-    const maxY = window.innerHeight - dot.offsetHeight;
-    
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-    
-    dot.style.left = '${randomX}px';
-    dot.style.top = '${randomX}px';
-});
+if (playButton) {
+  playButton.addEventListener("click", () => {
+    window.location.href = "jogo.html";
+  });
+}
