@@ -3,20 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>No Ponto - Início</title>
+    <title>No Ponto</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="intro">
     <div class="container">
-      <img src="imagens/logo.png" alt="No Ponto" class="logo" />
-      <img
-        src="imagens/play.png"
-        alt="Botão Play"
-        class="play-btn"
-        id="playButton"
-      />
+      <img src="imagens/logo.png" alt="Logo No Ponto" class="logo" />
+      <img src="imagens/play.png" alt="Botão Play" class="play-btn" id="playButton" />
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      document.getElementById("playButton").addEventListener("click", () => {
+        window.location.href = "jogo.html";
+      });
+    </script>
   </body>
 </html>

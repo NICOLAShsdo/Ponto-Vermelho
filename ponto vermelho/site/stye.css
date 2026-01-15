@@ -1,8 +1,9 @@
-/* ===== Tela inicial ===== */
 body.intro {
-  background-color: black;
+  background-color: #000;
   margin: 0;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,13 +12,12 @@ body.intro {
 
 .container {
   display: flex;
-  flex-direction: column; /* coloca logo acima e botão abaixo */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px; /* espaço entre o logo e o botão */
+  gap: 40px;
 }
 
-/* Logo centralizado e redimensionado */
 .logo {
   width: 300px;
   max-width: 80%;
@@ -25,7 +25,6 @@ body.intro {
   display: block;
 }
 
-/* Botão Play logo abaixo do logo */
 .play-btn {
   width: 180px;
   max-width: 60%;
@@ -37,27 +36,4 @@ body.intro {
 .play-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px red;
-}
-
-/* ===== Tela do jogo (mantém o que já funcionava) ===== */
-body.jogo {
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: white;
-  overflow: hidden;
-  position: relative;
-}
-
-#dot {
-  width: 40px;
-  height: 40px;
-  background-color: red;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  transition: top 0.2s, left 0.2s;
 }
