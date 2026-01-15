@@ -43,7 +43,11 @@ no-ponto/
 
 📸 Exemplo
 
-(adicione aqui uma captura de tela da tela inicial e do jogo)
+<img width="949" height="406" alt="image" src="https://github.com/user-attachments/assets/c1d64212-e74e-4f5e-8f21-8a322f0e5dac" />
+
+<img width="959" height="418" alt="image" src="https://github.com/user-attachments/assets/bb182eb8-e2dc-451f-a7b2-96a7e8d4bb78" />
+
+
 
 📄 Licença
 
