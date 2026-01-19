@@ -43,10 +43,11 @@ no-ponto/
 
 📸 Exemplo
 
-<img width="949" height="406" alt="image" src="https://github.com/user-attachments/assets/c1d64212-e74e-4f5e-8f21-8a322f0e5dac" />
+<img width="959" height="412" alt="image" src="https://github.com/user-attachments/assets/028364c2-6675-46b0-a885-b0c927e69f99" />
+
+<img width="959" height="410" alt="image" src="https://github.com/user-attachments/assets/a66b97f0-bc03-4916-a51d-ddf0abe262ec" />
 
 <img width="959" height="418" alt="image" src="https://github.com/user-attachments/assets/bb182eb8-e2dc-451f-a7b2-96a7e8d4bb78" />
-
 
 
 📄 Licença
