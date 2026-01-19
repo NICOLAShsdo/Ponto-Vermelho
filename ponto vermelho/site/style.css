@@ -1,0 +1,91 @@
+body.intro {
+  background-color: #000;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.logo {
+  width: 600px;
+  max-width: 80%;
+  height: auto;
+  display: block;
+}
+
+.play-btn {
+  width: 580px;
+  max-width: 60%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px red;
+}
+
+/* ===== Tela de seleção de modos ===== */
+body.selecao {
+  background-color: #000;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.modo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+/* Texto centralizado e grande */
+.titulo-modos {
+  font-size: 4rem;
+  font-family: "Arial Black", sans-serif;
+  color: white;
+  text-shadow: 0 0 25px red, 0 0 10px crimson;
+  margin: 0;
+}
+
+/* Botão estilizado */
+.modo-btn {
+  background-color: red;
+  color: white;
+  font-family: "Arial Black", sans-serif;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 20px;
+  padding: 20px 80px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
+.modo-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.9);
+  background-color: #ff1a1a;
+}
