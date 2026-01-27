@@ -6,6 +6,7 @@ O objetivo é clicar no ponto vermelho que aparece aleatoriamente na tela, testa
 O projeto conta com múltiplos modos de jogo, efeitos sonoros e recordes salvos no navegador.
 
 🎮 Modos de Jogo
+
 🔴 Clássico
 
 Clique no ponto vermelho
@@ -70,14 +71,23 @@ localStorage para salvar recordes
 🗂 Estrutura do projeto
 no-ponto/
 ├── index.html          → Tela inicial (logo + botão Play)
+
 ├── selecao.html        → Tela de seleção de modos
+
 ├── jogo.html           → Modo Clássico
+
 ├── jogo-tempo.html     → Modo Contra o Tempo
+
 ├── style.css           → Estilos das telas
+
 ├── imagens/            → Logo e botão Play
+
 └── sons/
+
     ├── click.mp3       → Som de clique
+    
     ├── recorde.mp3     → Som ao bater recorde
+    
     └── alarme.mp3      → Som de fim de tempo
 
 
