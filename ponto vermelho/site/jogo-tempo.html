@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>No Ponto - Contra o Tempo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
+
+    /* HUD */
+    .hud {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .timer {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .recorde {
+      font-size: 20px;
+      margin-top: 8px;
+    }
+
+    .recorde span {
+      font-weight: bold;
+    }
+
+    /* Animação do recorde */
+    .piscar {
+      animation: piscar 0.3s alternate infinite;
+    }
+
+    @keyframes piscar {
+      from { color: black; }
+      to { color: red; }
+    }
+
+    /* Ponto */
+    #dot {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      cursor: pointer;
+      z-index: 10; /* prioridade total */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hud">
+    <div class="timer">⏱️ 30</div>
+    <div class="recorde">🏆 Maior recorde: <span id="recorde">0</span></div>
+    <div class="recorde">🎯 Pontos: <span id="pontos">0</span></div>
+  </div>
+
+  <div id="dot"></div>
+
+  <!-- Sons -->
+  <audio id="recordeSound" src="sons/recorde.mp3"></audio>
+  <audio id="alarmSound" src="sons/alarme.mp3"></audio>
+
+  <script>
+  const dot = document.getElementById("dot");
+  const timerEl = document.querySelector(".timer");
+  const pontosEl = document.getElementById("pontos");
+  const recordeEl = document.getElementById("recorde");
+  const recordeSound = document.getElementById("recordeSound");
+  const alarmSound = document.getElementById("alarmSound"); // 🔊 alarme
+
+  // 🔊 Som de clique
+  const clickSound = new Audio("sons/click.mp3");
+  clickSound.volume = 0.5;
+
+  let pontos = 0;
+  let tempo = 30;
+  let recorde = localStorage.getItem("recordeTempo") || 0;
+  recordeEl.textContent = recorde;
+
+  function moverPonto() {
+    const maxX = window.innerWidth - dot.offsetWidth;
+    const maxY = window.innerHeight - dot.offsetHeight;
+
+    dot.style.left = `${Math.random() * maxX}px`;
+    dot.style.top = `${Math.random() * maxY}px`;
+  }
+
+  dot.addEventListener("click", () => {
+    if (tempo <= 0) return;
+
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    pontos++;
+    pontosEl.textContent = pontos;
+    moverPonto();
+
+    if (pontos > recorde) {
+      recorde = pontos;
+      recordeEl.textContent = recorde;
+      localStorage.setItem("recordeTempo", recorde);
+
+      recordeEl.classList.add("piscar");
+      recordeSound.currentTime = 0;
+      recordeSound.play();
+
+      setTimeout(() => {
+        recordeEl.classList.remove("piscar");
+      }, 2000);
+    }
+  });
+
+  moverPonto();
+
+  const cronometro = setInterval(() => {
+    tempo--;
+    timerEl.textContent = `⏱️ ${tempo}`;
+
+    if (tempo <= 0) {
+      clearInterval(cronometro);
+      timerEl.textContent = "⏱️ Fim!";
+      dot.style.display = "none";
+
+      // 🔊 TOCA O ALARME AO FINAL
+      alarmSound.currentTime = 0;
+      alarmSound.play();
+    }
+  }, 1000);
+</script>
+</body>
+</html>
+

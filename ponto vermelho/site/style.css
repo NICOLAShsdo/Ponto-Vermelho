@@ -1,5 +1,5 @@
 body.intro {
-  background-color: #000;
+  background-color: white;
   margin: 0;
   height: 100vh;
   width: 100vw;
@@ -40,7 +40,7 @@ body.intro {
 
 /* ===== Tela de seleção de modos ===== */
 body.selecao {
-  background-color: #000;
+  background-color: white;
   margin: 0;
   height: 100vh;
   width: 100vw;
@@ -61,11 +61,20 @@ body.selecao {
   gap: 50px;
 }
 
+/* Container dos botões */
+.botoes-modo {
+  display: flex;
+  gap: 40px; /* espaço entre os botões */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
 /* Texto centralizado e grande */
 .titulo-modos {
   font-size: 4rem;
   font-family: "Arial Black", sans-serif;
-  color: white;
+  color: rgb(79, 0, 0);
   text-shadow: 0 0 25px red, 0 0 10px crimson;
   margin: 0;
 }
