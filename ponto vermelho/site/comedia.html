@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>No Ponto - Comédia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #dot {
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="dot"></div>
+
+  <script>
+    const dot = document.getElementById("dot");
+
+    /* 🎵 Lista de sons com PESO
+       Sons que aparecem mais vezes = mais chance */
+    const sounds = [
+      "sons/som1.mp3",
+      "sons/som1.mp3",
+      "sons/som1.mp3",
+      "sons/som1.mp3", // mais frequente
+
+      "sons/som2.mp3",
+      "sons/som2.mp3",
+      "sons/som2.mp3",
+      "sons/som2.mp3",
+
+      "sons/som3.mp3",
+      "sons/som3.mp3",
+      "sons/som3.mp3",
+      "sons/som3.mp3",
+
+      "sons/som4.mp3",
+      "sons/som4.mp3",
+      "sons/som4.mp3",
+
+      "sons/som5.mp3",
+      "sons/som5.mp3",
+      "sons/som5.mp3",
+
+      "sons/som6.mp3",
+      "sons/som6.mp3",
+      "sons/som6.mp3",
+
+      "sons/som7.mp3",
+      "sons/som7.mp3",
+
+      "sons/som8.mp3",
+      "sons/som8.mp3",
+
+      "sons/som9.mp3",
+      "sons/som9.mp3",
+
+      "sons/som10.mp3"
+    ];
+
+    let lastSound = null;
+
+    function tocarSomAleatorio() {
+      let escolhido;
+
+      do {
+        escolhido = sounds[Math.floor(Math.random() * sounds.length)];
+      } while (escolhido === lastSound);
+
+      lastSound = escolhido;
+
+      const audio = new Audio(escolhido);
+      audio.volume = 0.6;
+      audio.play();
+    }
+
+    function moverPonto() {
+      const maxX = window.innerWidth - dot.offsetWidth;
+      const maxY = window.innerHeight - dot.offsetHeight;
+
+      dot.style.left = `${Math.random() * maxX}px`;
+      dot.style.top = `${Math.random() * maxY}px`;
+    }
+
+    dot.addEventListener("click", () => {
+      tocarSomAleatorio();
+      moverPonto();
+    });
+  </script>
+</body>
+</html>

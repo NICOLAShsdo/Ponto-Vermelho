@@ -11,12 +11,18 @@
   <h1 class="titulo-modos">Modos de Jogo</h1>
 
   <div class="botoes-modo">
+    <button class="modo-btn" id="btnComedia">Comédia</button>
     <button class="modo-btn" id="btnClassico">Clássico</button>
     <button class="modo-btn" id="btnTempo">Contra o Tempo</button>
   </div>
 </div>
 
+
 <script>
+  document.getElementById("btnComedia").addEventListener("click", () => {
+    window.location.href = "comedia.html"; // tela futura (pode estar vazia por enquanto)
+  });
+
   document.getElementById("btnClassico").addEventListener("click", () => {
     window.location.href = "jogo.html";
   });
@@ -25,5 +31,6 @@
     window.location.href = "jogo-tempo.html";
   });
 </script>
+
   </body>
 </html>
