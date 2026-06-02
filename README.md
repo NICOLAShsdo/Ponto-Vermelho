@@ -115,5 +115,7 @@ no-ponto/
 
 📄 Licença
 
+Link:https://chimerical-scone-d71b74.netlify.app/
+
 Este projeto é livre para estudo e uso pessoal.
 Sinta-se à vontade para modificar, aprender e compartilhar 🚀
