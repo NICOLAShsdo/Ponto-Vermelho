@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Ponto - Musical</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
+
+    #btnVoltar {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 5;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #btnVoltar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+
+    #dot {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #tutorial-overlay,
+    #vitoria-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #tutorial-box,
+    #vitoria-box {
+      max-width: 550px;
+      padding: 30px;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    #tutorial-box h2,
+    #vitoria-box h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    #tutorial-box p,
+    #vitoria-box p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    #tutorial-box small {
+      display: block;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    #vitoria-overlay {
+      display: none;
+      cursor: pointer;
+    }
+
+    #vitoria-box h2 {
+      color: white;
+      font-size: 2.5rem;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<button id="btnVoltar">Voltar</button>
+
+  <div id="tutorial-overlay">
+    <div id="tutorial-box">
+      <h2>Modo Musical</h2>
+
+```
+  <p>
+    Esse é o modo musical: quando você clicar no ponto ele irá desaparecer
+    e a música começará. Quando ele reaparecer, você terá que clicar nele
+    novamente para a música continuar. Termine a música e você vence!
+    Mas cuidado: você terá apenas 10 segundos para apertar o ponto quando
+    ele voltar e terá três tentativas. Se perder as três, terá que
+    recomeçar a música.
+  </p>
+
+  <small>Clique em qualquer lugar para continuar</small>
+</div>
+```
+
+  </div>
+
+  <div id="vitoria-overlay">
+    <div id="vitoria-box">
+      <h2>Parabéns!</h2>
+      <p>Você terminou a música e venceu!</p>
+      <small>Clique em qualquer lugar para continuar</small>
+    </div>
+  </div>
+
+  <div id="dot"></div>
+
+<audio id="musica" src="assets/sons/musica.mp3" preload="auto"></audio> <audio id="somVitoria" src="assets/sons/somVitoria.wav" preload="auto"></audio>
+
+  <script>
+    const overlay = document.getElementById("tutorial-overlay");
+    const dot = document.getElementById("dot");
+    const btnVoltar = document.getElementById("btnVoltar");
+    const vitoriaOverlay = document.getElementById("vitoria-overlay");
+    const musica = document.getElementById("musica");
+    const somVitoria = document.getElementById("somVitoria");
+
+    let jogoIniciado = false;
+    let aguardandoClique = false;
+    let jogoVencido = false;
+
+    let tentativasPerdidas = 0;
+
+    let timerReaparecer = null;
+    let timerLimite = null;
+
+    const DURACAO_MUSICA = 50;
+    const TEMPO_PARA_CLICAR = 10;
+
+    const tutorialJaVisto = localStorage.getItem("tutorialMusical");
+
+    if (tutorialJaVisto) {
+      overlay.style.display = "none";
+    } else {
+      overlay.addEventListener("click", () => {
+        overlay.style.display = "none";
+        localStorage.setItem("tutorialMusical", "true");
+      });
+    }
+
+    btnVoltar.addEventListener("click", () => {
+      window.location.href = "selecao.html";
+    });
+
+    function moverPonto() {
+      const maxX = window.innerWidth - dot.offsetWidth;
+      const maxY = window.innerHeight - dot.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      dot.style.left = `${randomX}px`;
+      dot.style.top = `${randomY}px`;
+    }
+
+    function esconderPonto() {
+      dot.style.display = "none";
+      aguardandoClique = false;
+    }
+
+    function mostrarPonto() {
+      if (jogoVencido) return;
+
+      moverPonto();
+
+      dot.style.display = "block";
+      aguardandoClique = true;
+
+      musica.pause();
+
+      clearTimeout(timerLimite);
+
+      timerLimite = setTimeout(() => {
+        if (!aguardandoClique || jogoVencido) return;
+
+        tentativasPerdidas++;
+        esconderPonto();
+
+        if (tentativasPerdidas >= 3) {
+          reiniciarMusica();
+        } else {
+          musica.play().catch(() => {});
+          agendarProximoPonto();
+        }
+      }, TEMPO_PARA_CLICAR * 1000);
+    }
+
+    function agendarProximoPonto() {
+      clearTimeout(timerReaparecer);
+
+      /*
+        O ponto fica escondido enquanto a música toca.
+        O tempo até ele reaparecer é escolhido aleatoriamente
+        entre 4 e 7 segundos.
+      */
+      const tempo = Math.floor(Math.random() * 4 + 4) * 1000;
+
+      timerReaparecer = setTimeout(() => {
+        mostrarPonto();
+      }, tempo);
+    }
+
+    function iniciarJogo() {
+      jogoIniciado = true;
+      tentativasPerdidas = 0;
+
+      esconderPonto();
+
+      musica.currentTime = 0;
+      musica.play().catch(() => {});
+
+      agendarProximoPonto();
+    }
+
+    function continuarMusica() {
+      esconderPonto();
+
+      musica.play().catch(() => {});
+
+      agendarProximoPonto();
+    }
+
+    function reiniciarMusica() {
+      clearTimeout(timerReaparecer);
+      clearTimeout(timerLimite);
+
+      tentativasPerdidas = 0;
+      aguardandoClique = false;
+
+      musica.pause();
+      musica.currentTime = 0;
+
+      esconderPonto();
+
+      musica.play().catch(() => {});
+
+      agendarProximoPonto();
+    }
+
+    function vencerJogo() {
+      if (jogoVencido) return;
+
+      jogoVencido = true;
+      aguardandoClique = false;
+
+      clearTimeout(timerReaparecer);
+      clearTimeout(timerLimite);
+
+      musica.pause();
+      musica.currentTime = DURACAO_MUSICA;
+
+      esconderPonto();
+
+      vitoriaOverlay.style.display = "flex";
+
+      somVitoria.currentTime = 0;
+      somVitoria.play().catch(() => {});
+    }
+
+    // Fecha a tela de vitória ao clicar
+    vitoriaOverlay.addEventListener("click", () => {
+      vitoriaOverlay.style.display = "none";
+
+      somVitoria.pause();
+      somVitoria.currentTime = 0;
+    });
+
+    dot.addEventListener("click", () => {
+      if (jogoVencido) return;
+
+      if (!jogoIniciado) {
+        iniciarJogo();
+        return;
+      }
+
+      if (aguardandoClique) {
+        clearTimeout(timerLimite);
+
+        tentativasPerdidas = 0;
+
+        continuarMusica();
+      }
+    });
+
+    musica.addEventListener("timeupdate", () => {
+      if (musica.currentTime >= DURACAO_MUSICA) {
+        vencerJogo();
+      }
+    });
+
+    musica.addEventListener("ended", () => {
+      if (!jogoVencido) {
+        vencerJogo();
+      }
+    });
+
+    moverPonto();
+  </script>
+
+</body>
+</html>

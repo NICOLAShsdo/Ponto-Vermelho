@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Ponto - Escolha a Música</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="selecao">
+
+<button id="btnVoltar">Voltar</button>
+
+  <div class="modo-container">
+    <h1 class="titulo-musical">Escolha a Música</h1>
+
+
+<div class="botoes-musical">
+  <button class="modo-btn" id="btnMusica1">Musica 1</button>
+</div>
+
+
+  </div>
+
+  <script>
+    document.getElementById("btnMusica1").addEventListener("click", () => {
+      window.location.href = "musical.html";
+    });
+
+    document.getElementById("btnVoltar").addEventListener("click", () => {
+      window.location.href = "selecao.html";
+    });
+  </script>
+
+</body>
+</html>
